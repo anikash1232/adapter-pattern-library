@@ -6,10 +6,10 @@ walking directions between any two buildings on campus! We will rely on two publ
 **Nominatim** (https://nominatim.org/release-docs/develop/) for geocoding and **OpenRoutesService** (https://openrouteservice.org/) for routing. Nominatim is a geocoder which takes
 an address and returns its latitude and longitude. OpenRoutesService takes the coordinates
 of two locations and gives walking directions. You will implement two classes that communicate with these public APIs,
-create a custom `UNCBuildingAPI` which
+create a custom `UNCBuildingApi` which
 stores information about different campus buildings, and create an Adapter which links your
 UNC API to OpensRoutesService. Ultimately, using your adapter, calling
-`getDirections("sitterson hall", "hamilton hall")` from your UNCBuildingAPI will print turn-by-turn instructions.
+`getDirections("sitterson hall", "hamilton hall")` from your UNCBuildingApi will print turn-by-turn instructions.
 
 ---
 
@@ -217,7 +217,7 @@ It will send an HTTP request to the OpenRoutesService (ORS) API. The service you
 
 Now, it's time to create your custom UNC API and your adapter!
 
-1. **`UNCBuildingAPI`** will store campus buildings and
+1. **`UNCBuildingApi`** will store campus buildings and
    later be used to print walking directions. This
    interface should have the methods:
    - `Building getBuilding(String name);` — takes a string like "Sitterson Hall" and returns a Building object
@@ -225,8 +225,8 @@ Now, it's time to create your custom UNC API and your adapter!
    - `void getDirections(String startBuilding, String endBuilding);` — this is the method that will
      be used to print walking directions.
 
-2. **Create a class called `UNCBuildingAPIImpl`** which implements
-   `UNCBuildingAPI`. This class should have one field:
+2. **Create a class called `UNCBuildingApiImpl`** which implements
+   `UNCBuildingApi`. This class should have one field:
    `private final Map<String, Building> buildings = new HashMap<>();`. Implement the method getBuilding()
    and getAllBuildingNames() as needed. For get getDirections(), leave this method empty.
    You will not be writing any implementation for this method. We
@@ -243,7 +243,7 @@ Now, it's time to create your custom UNC API and your adapter!
 Take a look at the WalkingDirectionsService class. This class has the method
 getWalkingDirections which takes four arguments - a start latitude, start longitude,
 end latitude, and end longitude. The method prints step-by-step directions from the start to
-the end location as well as the total time and distance of travel. Our UNCBuildingAPI has
+the end location as well as the total time and distance of travel. Our UNCBuildingApi has
 a getDirections method currently with no implementation. We will create an adapter class for
 WalkingDirectionsService and UNCBuildingApi. This class will implement UNCBuildingApi and
 wrap an instance of WDS. Following the conventions of the Adapter design pattern, this class
@@ -263,7 +263,7 @@ coordinates.
 ### Try your Adapter!
 1. In your main class, create a UNCBuildingImpl object.
 2. Add a bunch of campus buildings. Example: `unc.add("sitterson hall", "computer science");`
-   Note: you cannot get directions between two buildings unless you add them to your UNCBuildingAPI
+   Note: you cannot get directions between two buildings unless you add them to your UNCBuildingApi
    object. Also, it is extremely important that you spell the building name correctly or you'll get
    issues when the Nominatim calls are made to get the coordinates.
 3. In a try-catch block, create a WDS object and pass your API key.
