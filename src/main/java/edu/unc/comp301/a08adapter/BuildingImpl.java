@@ -29,12 +29,12 @@ public class BuildingImpl implements Building {
 
   @Override
   public double getLatitude() {
-    return 0;
+    return loc.getLatitude();
   }
 
   @Override
   public double getLongitude() {
-    return 0;
+    return loc.getLongitude();
   }
 
   public Location getLocation() {
