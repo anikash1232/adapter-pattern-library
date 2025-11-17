@@ -37,3 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 
+# Path to config.properties
+/config.properties
+
