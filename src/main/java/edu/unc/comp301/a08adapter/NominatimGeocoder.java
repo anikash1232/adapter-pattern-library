@@ -14,11 +14,11 @@ public class NominatimGeocoder {
   private final OkHttpClient client = new OkHttpClient();
   private final String userAgent;
 
-  public NominatimGeocoder(String userAgent){
+  public NominatimGeocoder(String userAgent) {
     this.userAgent = userAgent;
   }
 
-  public String createURL(String address){
+  public String createURL(String address) {
     HttpUrl.Builder url = HttpUrl.parse(baseURL).newBuilder();
     url.addQueryParameter("q", address);
     url.addQueryParameter("format", "json");
@@ -28,11 +28,7 @@ public class NominatimGeocoder {
   }
 
   protected Request buildRequest(String url) {
-    return new Request.Builder()
-            .url(url)
-            .header("User-Agent", userAgent)
-            .get()
-            .build();
+    return new Request.Builder().url(url).header("User-Agent", userAgent).get().build();
   }
 
   protected String sendRequest(Request request) throws IOException {
@@ -65,5 +61,4 @@ public class NominatimGeocoder {
     String json = sendRequest(req);
     return parseLocation(json);
   }
-
 }
